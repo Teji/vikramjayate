@@ -10,6 +10,8 @@ import WhyVikramSection from "../components/home/WhyVikramSection";
 import AudienceSection from "../components/home/AudienceSection";
 import HowItWorks from "../components/home/HowItWorks";
 import FAQSection from "../components/home/FAQSection";
+import MarketInsights from "../components/home/MarketInsights";
+import RecommendationsSection from "../components/home/RecommendationsSection";
 import FinalCTA from "../components/home/FinalCTA";
 
 import Footer from "../components/layout/Footer";
@@ -29,6 +31,8 @@ export default function Home() {
         <WhyVikramSection />
         <AudienceSection />
         <HowItWorks />
+        <MarketInsights />
+        <RecommendationsSection />
         <FAQSection />
         <FinalCTA />
       </main>
