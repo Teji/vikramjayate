@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, CircleCheck, Clock3, TrendingUp } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { getRecommendationBySlug } from "../services/recommendations";
+import Seo from "../components/Seo";
 
 const statusIcons = {
   ACTIVE: Clock3,
@@ -43,6 +44,12 @@ export default function RecommendationDetails() {
   if (error || !recommendation) {
     return (
       <main className="min-h-screen bg-[#07090c] px-5 py-32 text-center text-white">
+        <Seo
+          title="Recommendation Not Found | Vikram Jayate"
+          description="The requested stock recommendation is not available."
+          canonical={`https://vikramjayate.vercel.app/recommendations/${slug}`}
+          noindex
+        />
         <h1 className="text-3xl font-bold">
           {error || "Recommendation Not Found"}
         </h1>
@@ -62,6 +69,19 @@ export default function RecommendationDetails() {
 
   return (
     <main className="min-h-screen bg-[#07090c] px-5 py-20 text-white sm:px-8">
+      <Seo
+        title={`${recommendation.symbol} Stock Analysis | Vikram Jayate`}
+        description={`${recommendation.symbol} (${recommendation.company}) market analysis with entry, target, stop-loss and current status.`}
+        canonical={`https://vikramjayate.vercel.app/recommendations/${recommendation.slug}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: `${recommendation.symbol} Stock Analysis`,
+          description: recommendation.summary,
+          author: { "@type": "Person", name: "Vikram Jayate" },
+          mainEntityOfPage: `https://vikramjayate.vercel.app/recommendations/${recommendation.slug}`,
+        }}
+      />
       <div className="mx-auto max-w-4xl">
         <Link
           to="/recommendations"

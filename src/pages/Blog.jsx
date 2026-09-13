@@ -1,10 +1,16 @@
 import SectionHeading from "../components/common/SectionHeading";
 import BlogCard from "../components/blog/BlogCard";
+import Seo from "../components/Seo";
 import { blogPosts } from "../data/blogData";
 
 export default function Blog() {
   return (
     <div className="min-h-screen bg-[#07090c] text-white">
+      <Seo
+        title="Market Insights | Vikram Jayate"
+        description="Practical stock market education, price action concepts and structured stock-analysis insights from Vikram Jayate."
+        canonical="https://vikramjayate.vercel.app/blog"
+      />
       <section className="px-5 py-24 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeading

@@ -11,25 +11,41 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     let mounted = true;
 
+    async function loadProfile(userId) {
+      try {
+        const userProfile = await getProfile(userId);
+        if (mounted) setProfile(userProfile);
+      } catch (error) {
+        console.error("Profile loading failed:", error);
+        if (mounted) setProfile(null);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+
     async function loadSession() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) throw error;
 
-      if (!mounted) return;
+        if (!mounted) return;
 
-      setSession(session);
+        setSession(data.session);
 
-      if (session?.user) {
-        try {
-          const userProfile = await getProfile(session.user.id);
-          setProfile(userProfile);
-        } catch (error) {
-          console.error("Profile loading failed:", error);
+        if (data.session?.user) {
+          await loadProfile(data.session.user.id);
+        } else {
+          setProfile(null);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Session loading failed:", error);
+        if (mounted) {
+          setSession(null);
+          setProfile(null);
+          setLoading(false);
         }
       }
-
-      setLoading(false);
     }
 
     loadSession();
@@ -37,11 +53,20 @@ export function AuthProvider({ children }) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      if (!mounted) return;
+
       setSession(newSession);
 
-      if (!newSession) {
+      if (!newSession?.user) {
         setProfile(null);
+        setLoading(false);
+        return;
       }
+
+      setLoading(true);
+      setTimeout(() => {
+        if (mounted) loadProfile(newSession.user.id);
+      }, 0);
     });
 
     return () => {
@@ -50,16 +75,18 @@ export function AuthProvider({ children }) {
     };
   }, []);
 
+  const isPremium =
+    profile?.subscription_status === "active" &&
+    (!profile?.current_period_end ||
+      new Date(profile.current_period_end) > new Date());
+
   const value = {
     session,
     user: session?.user || null,
     profile,
     loading,
     isLoggedIn: Boolean(session),
-    isPremium:
-  profile?.subscription_status === "active" &&
-  (!profile?.current_period_end ||
-    new Date(profile.current_period_end) > new Date()),
+    isPremium,
   };
 
   return (

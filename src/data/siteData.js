@@ -59,6 +59,7 @@ export const siteData = {
   insights: [
     {
       id: 1,
+      slug: "understanding-market-trends",
       category: "Market Outlook",
       title: "Understanding Market Trends",
       description:
@@ -67,6 +68,7 @@ export const siteData = {
     },
     {
       id: 2,
+      slug: "reading-price-action",
       category: "Technical Analysis",
       title: "Reading Price Action",
       description:
@@ -75,6 +77,7 @@ export const siteData = {
     },
     {
       id: 3,
+      slug: "structured-stock-analysis",
       category: "Stock Analysis",
       title: "Building a Structured Analysis",
       description:
@@ -83,51 +86,4 @@ export const siteData = {
     },
   ],
 
-  recommendations: [
-    {
-      id: 1,
-      slug: "reliance",
-      symbol: "RELIANCE",
-      company: "Reliance Industries",
-      type: "BUY",
-      entry: "₹2,850",
-      target: "₹3,050",
-      stopLoss: "₹2,750",
-      status: "ACTIVE",
-      summary:
-        "A sample educational market setup showing how a structured recommendation can be presented.",
-      analysis:
-        "The setup is based on price structure, momentum and an important market zone. Traders should independently verify the setup before making any decision.",
-    },
-    {
-      id: 2,
-      slug: "tcs",
-      symbol: "TCS",
-      company: "Tata Consultancy Services",
-      type: "BUY",
-      entry: "₹3,420",
-      target: "₹3,700",
-      stopLoss: "₹3,250",
-      status: "TARGET ACHIEVED",
-      summary:
-        "Example of a completed recommendation where the target level was achieved.",
-      analysis:
-        "This example demonstrates how completed recommendations can be documented for historical review and educational purposes.",
-    },
-    {
-      id: 3,
-      slug: "hdfc-bank",
-      symbol: "HDFCBANK",
-      company: "HDFC Bank",
-      type: "BUY",
-      entry: "₹1,680",
-      target: "₹1,820",
-      stopLoss: "₹1,610",
-      status: "CLOSED",
-      summary:
-        "Example of a closed market idea maintained for historical reference.",
-      analysis:
-        "A closed recommendation can be reviewed to understand the original setup, risk level and eventual outcome.",
-    },
-  ],
 };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPremiumRecommendations } from "../services/recommendations";
+import Seo from "../components/Seo";
 
 
 export default function Premium() {
@@ -28,6 +29,12 @@ export default function Premium() {
 
   return (
     <main className="min-h-screen bg-[#07090c] px-5 py-24 text-white sm:px-8">
+      <Seo
+          title="Premium Content | Vikram Jayate"
+          description="Premium market analysis and member-only recommendations from Vikram Jayate."
+          canonical="https://vikramjayate.vercel.app/premium"
+          noindex
+        />
       <div className="mx-auto max-w-6xl">
         <p className="text-xs uppercase tracking-[0.2em] text-emerald-400">
           Premium Members

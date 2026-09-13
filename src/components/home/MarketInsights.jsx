@@ -1,4 +1,5 @@
 import { ArrowUpRight, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 import SectionHeading from "../common/SectionHeading";
 import { siteData } from "../../data/siteData";
 
@@ -43,13 +44,13 @@ export default function MarketInsights() {
               <div className="mt-7 flex items-center justify-between border-t border-white/5 pt-5">
                 <span className="text-xs text-gray-500">{item.date}</span>
 
-                <button
-                  type="button"
+                <Link
+                  to={`/blog/${item.slug}`}
                   className="flex items-center gap-1 text-xs font-semibold text-emerald-400"
                 >
                   Read More
                   <ArrowUpRight size={14} />
-                </button>
+                </Link>
               </div>
             </article>
           ))}

@@ -1,17 +1,24 @@
 import { ArrowLeft } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import Seo from "../components/Seo";
 import { blogPosts } from "../data/blogData";
+
+const SITE_URL = "https://vikramjayate.vercel.app";
 
 export default function BlogDetails() {
   const { slug } = useParams();
-
   const post = blogPosts.find((item) => item.slug === slug);
 
   if (!post) {
     return (
       <div className="min-h-screen bg-[#07090c] px-5 py-32 text-center text-white">
+        <Seo
+          title="Article Not Found | Vikram Jayate"
+          description="The requested Vikram Jayate market insight could not be found."
+          canonical={`${SITE_URL}/blog/${slug}`}
+          noindex
+        />
         <h1 className="text-3xl font-bold">Article Not Found</h1>
-
         <Link
           to="/blog"
           className="mt-6 inline-flex items-center gap-2 text-sm text-emerald-400"
@@ -25,6 +32,22 @@ export default function BlogDetails() {
 
   return (
     <article className="min-h-screen bg-[#07090c] px-5 py-24 text-white sm:px-8">
+      <Seo
+        title={`${post.title} | Vikram Jayate`}
+        description={post.excerpt}
+        canonical={`${SITE_URL}/blog/${post.slug}`}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: post.title,
+          description: post.excerpt,
+          author: { "@type": "Person", name: "Vikram Jayate" },
+          publisher: { "@type": "Person", name: "Vikram Jayate" },
+          mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+        }}
+      />
+
       <div className="mx-auto max-w-3xl">
         <Link
           to="/blog"
@@ -48,35 +71,18 @@ export default function BlogDetails() {
           </p>
 
           <div className="mt-10 border-t border-white/10 pt-10">
-            <p className="text-lg leading-8 text-gray-300">
-              {post.excerpt}
-            </p>
+            <p className="text-lg leading-8 text-gray-300">{post.excerpt}</p>
 
             <div className="mt-10 space-y-6 text-sm leading-7 text-gray-400">
-              <p>
-                Market analysis begins with understanding context. Before
-                looking at a particular stock, it is important to understand
-                the broader market structure and prevailing trend.
-              </p>
-
-              <p>
-                Support, resistance, momentum and price behaviour can provide
-                useful information when studying a market. A structured
-                approach can help reduce emotional decision-making.
-              </p>
-
-              <p>
-                Every market decision involves risk. Analysis should therefore
-                be combined with appropriate risk management and independent
-                research.
-              </p>
+              {post.content.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
           </div>
 
           <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.02] p-5 text-xs leading-5 text-gray-500">
             This article is for educational purposes only. It does not
-            constitute a guarantee of returns or personalised investment
-            advice.
+            constitute a guarantee of returns or personalised investment advice.
           </div>
         </div>
       </div>

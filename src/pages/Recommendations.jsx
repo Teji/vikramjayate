@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import RecommendationsSection from "../components/home/RecommendationsSection";
 import { getRecommendations } from "../services/recommendations";
+import Seo from "../components/Seo";
 
 const filters = ["ALL", "ACTIVE", "TARGET ACHIEVED", "CLOSED"];
 
@@ -34,6 +35,11 @@ export default function Recommendations() {
 
   return (
     <main className="min-h-screen bg-[#07090c] px-5 py-20 text-white sm:px-8">
+      <Seo
+        title="Stock Recommendations & Market Analysis | Vikram Jayate"
+        description="Review published stock market ideas, entry levels, targets, stop-loss levels and outcomes from Vikram Jayate."
+        canonical="https://vikramjayate.vercel.app/recommendations"
+      />
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../services/auth";
+import Seo from "../components/Seo";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -47,6 +48,12 @@ export default function Signup() {
 
   return (
     <main className="min-h-screen bg-[#07090c] px-5 py-24 text-white">
+      <Seo
+          title="Create Account | Vikram Jayate"
+          description="Create your Vikram Jayate member account."
+          canonical="https://vikramjayate.vercel.app/signup"
+          noindex
+        />
       <div className="mx-auto max-w-md">
         <div className="rounded-3xl border border-white/10 bg-[#0d1217] p-7 sm:p-9">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-400">

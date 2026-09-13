@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "../services/auth";
 import { useAuth } from "../context/useAuth";
+import Seo from "../components/Seo";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { user, profile, loading } = useAuth();
+  const { user, profile, isPremium, loading } = useAuth();
   const [loggingOut, setLoggingOut] = useState(false);
 
   async function handleLogout() {
@@ -22,6 +23,12 @@ export default function Dashboard() {
   if (loading) {
     return (
       <main className="min-h-screen bg-[#07090c] px-5 py-32 text-center text-white">
+        <Seo
+          title="Member Dashboard | Vikram Jayate"
+          description="Manage your Vikram Jayate member account and premium access."
+          canonical="https://vikramjayate.vercel.app/dashboard"
+          noindex
+        />
         Loading account...
       </main>
     );
@@ -29,6 +36,12 @@ export default function Dashboard() {
 
   return (
     <main className="min-h-screen bg-[#07090c] px-5 py-24 text-white">
+      <Seo
+        title="Member Dashboard | Vikram Jayate"
+        description="Manage your Vikram Jayate member account and premium access."
+        canonical="https://vikramjayate.vercel.app/dashboard"
+        noindex
+      />
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>
@@ -68,11 +81,11 @@ export default function Dashboard() {
             <p className="text-xs text-gray-500">ACCESS</p>
 
             <p className="mt-3 text-lg font-semibold">
-              {profile?.premium ? "Premium Member" : "Free Member"}
+              {isPremium ? "Premium Member" : "Free Member"}
             </p>
 
             <p className="mt-2 text-sm text-gray-500">
-              {profile?.premium
+              {isPremium
                 ? "You have access to premium content."
                 : "Upgrade to access premium content."}
             </p>
@@ -87,7 +100,7 @@ export default function Dashboard() {
             Public Recommendations
           </Link>
 
-          {profile?.premium && (
+          {isPremium && (
             <Link
               to="/premium"
               className="rounded-xl bg-emerald-400 px-5 py-3 text-sm font-bold text-black transition hover:bg-emerald-300"

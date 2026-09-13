@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /signup
+Disallow: /dashboard
+Disallow: /premium
+
+Sitemap: https://vikramjayate.vercel.app/sitemap.xml

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import logo from "../../assets/logo.png";
 
@@ -125,13 +126,13 @@ export default function Navbar() {
               )}
             </div>
 
-            <a href="/blog" className={navLinkClass}>
+            <Link to="/blog" className={navLinkClass}>
               Insights
-            </a>
+            </Link>
 
-            <a href="/recommendations" className={navLinkClass}>
+            <Link to="/recommendations" className={navLinkClass}>
               Recommendations
-            </a>
+            </Link>
 
             {/* More */}
             <div
@@ -286,21 +287,21 @@ export default function Navbar() {
               )}
             </div>
 
-            <a
-              href="/blog"
+            <Link
+              to="/blog"
               onClick={closeMenus}
               className={mobileLinkClass}
             >
               Insights
-            </a>
+            </Link>
 
-            <a
-              href="/recommendations"
+            <Link
+              to="/recommendations"
               onClick={closeMenus}
               className={mobileLinkClass}
             >
               Recommendations
-            </a>
+            </Link>
 
             {/* Mobile More */}
             <div className="mt-1">
