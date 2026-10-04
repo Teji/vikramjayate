@@ -86,6 +86,7 @@ export function AuthProvider({ children }) {
     profile,
     loading,
     isLoggedIn: Boolean(session),
+    isAdmin: profile?.role === "admin",
     isPremium,
   };
 

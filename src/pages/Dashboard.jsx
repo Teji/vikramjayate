@@ -6,7 +6,13 @@ import Seo from "../components/Seo";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { user, profile, isPremium, loading } = useAuth();
+  const {
+  user,
+  profile,
+  isPremium,
+  isAdmin,
+  loading,
+} = useAuth();
   const [loggingOut, setLoggingOut] = useState(false);
 
   async function handleLogout() {
@@ -99,6 +105,12 @@ export default function Dashboard() {
           >
             Public Recommendations
           </Link>
+
+          {isAdmin && (
+            <Link to="/admin" className="rounded-xl border border-emerald-400/30 px-5 py-3 text-sm text-emerald-400 transition hover:bg-emerald-400/10">
+              Admin Dashboard
+            </Link>
+          )}
 
           {isPremium && (
             <Link

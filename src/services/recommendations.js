@@ -59,3 +59,29 @@ export async function getPremiumRecommendations() {
     stopLoss: item.stop_loss,
   }));
 }
+
+export async function getAdminRecommendations() {
+  const { data, error } = await supabase
+    .from("recommendations")
+    .select("id, slug, symbol, company, type, entry, target, stop_loss, status, summary, analysis, is_premium, published_at")
+    .order("published_at", { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function createRecommendation(values) {
+  const { data, error } = await supabase.from("recommendations").insert(values).select().single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateRecommendation(id, values) {
+  const { data, error } = await supabase.from("recommendations").update(values).eq("id", id).select().single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteRecommendation(id) {
+  const { error } = await supabase.from("recommendations").delete().eq("id", id);
+  if (error) throw error;
+}

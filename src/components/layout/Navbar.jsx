@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import logo from "../../assets/logo.png";
+import { useAuth } from "../../context/useAuth";
 
 const navLinkClass =
   "text-sm text-gray-300 transition-colors duration-200 hover:text-emerald-400";
@@ -13,6 +14,7 @@ const dropdownItemClass =
   "group block rounded-xl px-4 py-3 transition-all duration-200 hover:bg-emerald-400/10";
 
 export default function Navbar() {
+  const { isLoggedIn, isAdmin } = useAuth();
   const [servicesOpen, setServicesOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -201,6 +203,14 @@ export default function Navbar() {
               )}
             </div>
 
+            {isLoggedIn ? (
+              <Link to={isAdmin ? "/admin" : "/dashboard"} className={navLinkClass}>
+                {isAdmin ? "Admin" : "Dashboard"}
+              </Link>
+            ) : (
+              <Link to="/login" className={navLinkClass}>Login</Link>
+            )}
+
             {/* CTA */}
             <a
               href="#contact"
@@ -302,6 +312,14 @@ export default function Navbar() {
             >
               Recommendations
             </Link>
+
+            {isLoggedIn ? (
+              <Link to={isAdmin ? "/admin" : "/dashboard"} onClick={closeMenus} className={mobileLinkClass}>
+                {isAdmin ? "Admin Dashboard" : "Dashboard"}
+              </Link>
+            ) : (
+              <Link to="/login" onClick={closeMenus} className={mobileLinkClass}>Login</Link>
+            )}
 
             {/* Mobile More */}
             <div className="mt-1">
