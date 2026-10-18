@@ -6,7 +6,6 @@ import Recommendations from "./pages/Recommendations";
 import RecommendationDetails from "./pages/RecommendationDetails";
 import { AuthProvider } from "./context/AuthContext";
 import Premium from "./pages/Premium";
-import Subscribe from "./pages/Subscribe";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
@@ -17,6 +16,7 @@ import AdminSettings from "./pages/admin/AdminSettings";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import PremiumRoute from "./components/auth/PremiumRoute";
 import AdminRoute from "./components/auth/AdminRoute";
+import Subscribe from "./pages/Subscribe";
 
 function App() {
   return <AuthProvider><BrowserRouter><Routes>
@@ -25,6 +25,7 @@ function App() {
     <Route path="/blog/:slug" element={<BlogDetails />} />
     <Route path="/recommendations" element={<Recommendations />} />
     <Route path="/recommendations/:slug" element={<RecommendationDetails />} />
+    <Route path="/subscribe" element={<Subscribe />} />
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup />} />
     <Route path="/subscribe" element={<Subscribe />} />
