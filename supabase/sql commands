@@ -1,0 +1,78 @@
+select
+  symbol,
+  type,
+  entry,
+  stop_loss,
+  target,
+  status,
+  telegram_message_id
+from public.recommendations
+where telegram_chat_id = -1003712192730
+order by created_at desc
+limit 10;
+
+INSERT INTO public.recommendations (
+  slug, symbol, company, type,
+  entry, target, stop_loss,
+  status, summary, analysis, is_premium
+)
+VALUES (
+  'nifty-22800pe-sell-manual-001',
+  'NIFTY 22800PE',
+  'NIFTY',
+  'SELL',
+  '156',
+  '30 points',
+  '170',
+  'ACTIVE',
+  'Sell Nifty 22800PE @156; SL 170; Target 30 points',
+  'Manual recommendation',
+  false
+)
+RETURNING *;
+
+SELECT
+  id, slug, symbol, type,
+  entry, target, stop_loss,
+  status, is_premium, created_at
+FROM public.recommendations
+ORDER BY created_at DESC;
+
+
+UPDATE public.recommendations
+SET
+  stop_loss = '165',
+  target = '40 points',
+  status = 'ACTIVE'
+WHERE slug = 'nifty-22800pe-sell-manual-001'
+RETURNING *;
+
+UPDATE public.recommendations
+SET status = 'CLOSED'
+WHERE slug = 'nifty-22800pe-sell-manual-001'
+RETURNING *;
+
+DELETE FROM public.recommendations
+WHERE slug = 'nifty-22800pe-sell-manual-001'
+RETURNING *;
+
+****************** check recomendation***************
+SELECT
+    u.id,
+    u.email,
+    p.full_name,
+    p.role
+FROM auth.users u
+LEFT JOIN public.profiles p ON u.id = p.id
+ORDER BY u.created_at DESC;
+*************************
+***************check user list************
+SELECT
+    u.id,
+    u.email,
+    p.full_name,
+    p.role
+FROM auth.users u
+LEFT JOIN public.profiles p ON u.id = p.id
+ORDER BY u.created_at DESC;
+**************************

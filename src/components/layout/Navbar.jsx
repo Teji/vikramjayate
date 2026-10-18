@@ -136,6 +136,8 @@ export default function Navbar() {
               Recommendations
             </Link>
 
+            <Link to="/subscribe" className={navLinkClass}>Subscription</Link>
+
             {/* More */}
             <div
               className="relative flex h-[72px] items-center"
@@ -202,6 +204,8 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+
+            <Link to="/subscribe" onClick={closeMenus} className={mobileLinkClass}>Subscription</Link>
 
             {isLoggedIn ? (
               <Link to={isAdmin ? "/admin" : "/dashboard"} className={navLinkClass}>
@@ -312,6 +316,8 @@ export default function Navbar() {
             >
               Recommendations
             </Link>
+
+            <Link to="/subscribe" onClick={closeMenus} className={mobileLinkClass}>Subscription</Link>
 
             {isLoggedIn ? (
               <Link to={isAdmin ? "/admin" : "/dashboard"} onClick={closeMenus} className={mobileLinkClass}>

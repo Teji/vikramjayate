@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { getSiteSettings } from "../../services/siteSettings";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -9,6 +11,9 @@ import {
 import aboutImage from "../../assets/images/vikram-about.png";
 
 export default function AboutSection() {
+  const [siteImage, setSiteImage] = useState(aboutImage);
+  useEffect(() => { let active = true; getSiteSettings().then(s => { if (active && s.about_image_url) setSiteImage(s.about_image_url); }); return () => { active=false; }; }, []);
+
   return (
     <section
       id="about"
@@ -39,7 +44,7 @@ export default function AboutSection() {
               <div className="aspect-[4/5]">
 
                 <img
-                  src={aboutImage}
+                  src={siteImage}
                   alt="Vikram Jayate"
                   className="h-full w-full object-cover object-top"
                 />

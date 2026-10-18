@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   ArrowRight,
   CircleCheck,
@@ -7,7 +6,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SectionHeading from "../common/SectionHeading";
-import { getRecommendations } from "../../services/recommendations";
+import { formatRecommendationDate } from "../../utils/recommendationDate";
 
 const statusIcons = {
   ACTIVE: Clock3,
@@ -19,27 +18,7 @@ export default function RecommendationsSection({
   recommendations,
   showHeading = true,
 }) {
-  const [items, setItems] = useState(recommendations || []);
-  const [loading, setLoading] = useState(!recommendations);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (recommendations) return;
-
-    async function loadRecommendations() {
-      try {
-        const data = await getRecommendations();
-        setItems(data);
-      } catch (err) {
-        console.error(err);
-        setError("Unable to load recommendations right now.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadRecommendations();
-  }, [recommendations]);
+  const items = recommendations ?? [];
 
   return (
     <section
@@ -55,25 +34,13 @@ export default function RecommendationsSection({
           />
         )}
 
-        {loading && (
-          <div className="rounded-3xl border border-white/10 bg-[#0d1217] p-10 text-center text-sm text-gray-400">
-            Loading recommendations...
-          </div>
-        )}
-
-        {error && (
-          <div className="rounded-3xl border border-red-400/10 bg-red-400/5 p-10 text-center text-sm text-red-300">
-            {error}
-          </div>
-        )}
-
-        {!loading && !error && items.length === 0 && (
+        {items.length === 0 && (
           <div className="rounded-3xl border border-white/10 bg-[#0d1217] p-10 text-center text-sm text-gray-400">
             No public recommendations are available yet.
           </div>
         )}
 
-        {!loading && !error && items.length > 0 && (
+        {items.length > 0 && (
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {items.map((item) => {
               const StatusIcon = statusIcons[item.status] || TrendingUp;
@@ -104,6 +71,7 @@ export default function RecommendationsSection({
                     <Metric label="Stop Loss" value={item.stopLoss} />
                   </div>
 
+                  <p className="mt-5 text-xs text-gray-400">Published: {formatRecommendationDate(item.published_at || item.created_at)}</p>
                   <div className="mt-6 flex items-center gap-2 border-t border-white/5 pt-5">
                     <StatusIcon size={15} className="text-emerald-400" />
                     <span className="text-xs font-semibold text-gray-300">

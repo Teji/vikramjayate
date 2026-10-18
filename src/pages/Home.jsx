@@ -12,7 +12,7 @@ import AudienceSection from "../components/home/AudienceSection";
 import HowItWorks from "../components/home/HowItWorks";
 import FAQSection from "../components/home/FAQSection";
 import MarketInsights from "../components/home/MarketInsights";
-import RecommendationsSection from "../components/home/RecommendationsSection";
+import RecommendationsSection from "../components/home/RecommendationsFeed";
 import FinalCTA from "../components/home/FinalCTA";
 
 import Footer from "../components/layout/Footer";

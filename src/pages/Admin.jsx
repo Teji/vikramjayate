@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FileText, LineChart } from "lucide-react";
+import { FileText, LineChart, Settings } from "lucide-react";
 import { useAuth } from "../context/useAuth";
 import AdminNav from "../components/admin/AdminNav";
 
@@ -8,6 +8,7 @@ export default function Admin() {
   const cards = [
     { to: "/admin/blog", title: "Blog Posts", text: "Create, edit, publish and delete articles.", icon: FileText },
     { to: "/admin/recommendations", title: "Recommendations", text: "Manage public and premium market ideas.", icon: LineChart },
+    { to: "/admin/settings", title: "Website Settings", text: "Subscription pricing, WhatsApp and homepage photos.", icon: Settings },
   ];
   return <main className="min-h-screen bg-[#07090c] px-5 py-24 text-white"><div className="mx-auto max-w-6xl">
 <AdminNav />

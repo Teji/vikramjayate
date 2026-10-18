@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPremiumRecommendations } from "../services/recommendations";
 import Seo from "../components/Seo";
+import { formatRecommendationDate } from "../utils/recommendationDate";
 
 
 export default function Premium() {
@@ -56,6 +57,7 @@ export default function Premium() {
           </span>
         </div>
 
+        <div className="mt-6"><Link to="/subscribe" className="text-sm text-emerald-400 underline">View subscription plans</Link></div>
         <div className="mt-12">
           {loading && (
             <div className="rounded-3xl border border-white/10 bg-[#0d1217] p-10 text-center text-sm text-gray-400">
@@ -100,6 +102,7 @@ export default function Premium() {
                     </span>
                   </div>
 
+                  <p className="mt-4 text-xs text-gray-400">Published: {formatRecommendationDate(item.published_at)}</p>
                   <div className="mt-7 grid grid-cols-3 gap-2">
                     <Metric label="Entry" value={item.entry} />
                     <Metric label="Target" value={item.target} />

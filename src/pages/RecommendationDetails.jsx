@@ -1,3 +1,4 @@
+import { formatRecommendationDate } from "../utils/recommendationDate";
 import { useEffect, useState } from "react";
 import { ArrowLeft, CircleCheck, Clock3, TrendingUp } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
@@ -91,6 +92,7 @@ export default function RecommendationDetails() {
           All Recommendations
         </Link>
 
+        <p className="mt-5 text-sm text-gray-400">Published: {formatRecommendationDate(recommendation.published_at)}</p>
         <div className="mt-10 rounded-3xl border border-white/10 bg-[#0d1217] p-6 sm:p-10">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
             <div>

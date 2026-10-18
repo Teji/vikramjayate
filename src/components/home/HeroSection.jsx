@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { getSiteSettings } from "../../services/siteSettings";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -11,6 +13,9 @@ import {
 import heroImage from "../../assets/images/vikram-hero.png";
 
 export default function HeroSection() {
+  const [siteImage, setSiteImage] = useState(heroImage);
+  useEffect(() => { let active = true; getSiteSettings().then(s => { if (active && s.hero_image_url) setSiteImage(s.hero_image_url); }); return () => { active=false; }; }, []);
+
   return (
     <section
   id="home"
@@ -215,7 +220,7 @@ export default function HeroSection() {
                 <div className="relative aspect-[4/5]">
 
                   <img
-                    src={heroImage}
+                    src={siteImage}
                     alt="Vikram Jayate"
                     className="absolute inset-0 h-full w-full object-cover object-top"
                   />

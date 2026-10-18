@@ -6,12 +6,14 @@ import Recommendations from "./pages/Recommendations";
 import RecommendationDetails from "./pages/RecommendationDetails";
 import { AuthProvider } from "./context/AuthContext";
 import Premium from "./pages/Premium";
+import Subscribe from "./pages/Subscribe";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import AdminBlog from "./pages/admin/AdminBlog";
 import AdminRecommendations from "./pages/admin/AdminRecommendations";
+import AdminSettings from "./pages/admin/AdminSettings";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import PremiumRoute from "./components/auth/PremiumRoute";
 import AdminRoute from "./components/auth/AdminRoute";
@@ -25,12 +27,14 @@ function App() {
     <Route path="/recommendations/:slug" element={<RecommendationDetails />} />
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup />} />
+    <Route path="/subscribe" element={<Subscribe />} />
     <Route element={<ProtectedRoute />}><Route path="/dashboard" element={<Dashboard />} /></Route>
     <Route element={<PremiumRoute />}><Route path="/premium" element={<Premium />} /></Route>
     <Route element={<AdminRoute />}>
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin/blog" element={<AdminBlog />} />
       <Route path="/admin/recommendations" element={<AdminRecommendations />} />
+      <Route path="/admin/settings" element={<AdminSettings />} />
     </Route>
   </Routes></BrowserRouter></AuthProvider>;
 }

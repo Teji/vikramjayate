@@ -87,7 +87,7 @@ export default function AdminRecommendations() {
         summary: form.summary.trim() || null,
         analysis: form.analysis.trim() || null,
         is_premium: form.is_premium,
-        published_at: new Date().toISOString(),
+        ...(!editing ? { published_at: new Date().toISOString() } : {}),
       };
 
       if (editing) {

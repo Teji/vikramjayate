@@ -34,6 +34,8 @@ export default function AdminNav() {
             Recommendations
           </NavLink>
 
+          <NavLink to="/admin/settings" className={navClass}>Website Settings</NavLink>
+
           <Link
             to="/"
             className="rounded-full border border-white/15 px-4 py-2 text-sm text-gray-300 transition hover:bg-white/10 hover:text-white"

@@ -30,7 +30,7 @@ export default function Recommendations() {
   const filteredRecommendations = useMemo(() => {
     if (filter === "ALL") return recommendations;
 
-    return recommendations.filter((item) => item.status === filter);
+    return recommendations.filter((item) => String(item.status ?? "").trim().toUpperCase().replace(/[_-]/g, " ") === filter);
   }, [filter, recommendations]);
 
   return (
